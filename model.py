@@ -10,17 +10,72 @@ class MyModel:
         self.db_name = db_name
         
         try:
-            self.con = sqlite3.connect(self.db_name)
-            self.cur = self.con.cursor()
-            self.cur.execute('create table if not exists mytasks (id integer PRIMARY KEY, name text, date text, type text, description text)')
-            self.con.commit()
+            con = sqlite3.connect(self.db_name)
+            return con
+        except Error:
+            return Error()
+
+
+    def sql_table(self, con):
+        cur = con.cursor()
+        cur.execute('create table if not exists mytasks (id integer PRIMARY KEY, name text, date text, type text, description text)')
+        con.commit()
+
+    def run_query(self, query, params = ()):
+        try:
+            con = self.sql_connection()
+            self.sql_table(con)
+            cur = con.cursor()
+            result = cur.execute(query, params)
+            con.commit()
+            return result
         except Error:
             return Error()
         finally:
-            self.con.close()
+            con.close()
 
-    def tasks(self, name, desc, type, date):
+    def create_task(self, name, date, type, desc):
         self.name = name
-        self.desc = desc
-        self.type = type
         self.date = date
+        self.type = type
+        self.desc = desc
+        
+        parameters = (self.name, self.date, self.type, self.desc)
+        try:
+            query = 'INSERT INTO mytasks VALUES(NULL, ?, ?, ?, ?)'
+            self.run_query(query, parameters)
+        except Error:
+            return Error()
+
+    def read(self, id):
+        self.id = id
+        try:
+            query = f'SELECT name, type, date, description FROM mytasks WHERE id = "{self.id}"'
+            self.run_query(query)
+        except Error:
+            return Error()
+
+    def update(self, id, new_values):
+        self.id = id
+        self.new_values = new_values
+        try:
+            query = f'UPDATE mytasks SET name = "{self.new_values[0]}", type = "{self.new_values[1]}", date = "{self.new_values[2]}", description = "{self.new_values[3]}" WHERE id = "{self.id}"'
+            result = self.run_query(query)
+        except Error:
+            return Error()
+
+    def delete(self, id):
+        self. id = id
+        try:
+            query = f'DELETE from mytasks WHERE id = "{self.id}"'
+            result = self.run_query(query)
+        except Error:
+            return Error()
+    
+    def get_tasks(self, day):
+        self.day = day
+        try:
+            query = f'SELECT name, type, date, description FROM mytasks WHERE date = "{self.day}"'
+            results = self.run_query(query)
+        except Error:
+            return Error()
