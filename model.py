@@ -4,11 +4,10 @@ from sqlite3 import Error
 class MyModel:
     def __init__(self):
         pass
+    
+    db_name = 'kiss.db'
 
-    def sql_connection(self):
-        db_name = 'kiss.db'
-        self.db_name = db_name
-        
+    def sql_connection(self):        
         try:
             con = sqlite3.connect(self.db_name)
             return con
@@ -28,7 +27,7 @@ class MyModel:
             cur = con.cursor()
             result = cur.execute(query, params)
             con.commit()
-            return result
+            return result.fetchall()
         except Error:
             return Error()
         finally:
@@ -73,9 +72,9 @@ class MyModel:
             return Error()
     
     def get_tasks(self, day):
-        self.day = day
         try:
-            query = f'SELECT name, type, date, description FROM mytasks WHERE date = "{self.day}"'
-            results = self.run_query(query)
+            query = f'SELECT name FROM mytasks WHERE date = "{day}"'
+            result = self.run_query(query)
+            return result
         except Error:
             return Error()

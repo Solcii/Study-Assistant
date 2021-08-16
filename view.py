@@ -1,4 +1,3 @@
-from calendar import month
 from tkinter import Tk
 from tkinter import StringVar
 from tkinter import Toplevel
@@ -10,7 +9,8 @@ from tkinter import Text
 from tkinter import ttk
 from tkcalendar import Calendar
 from datetime import datetime
-from tkinter.constants import CENTER, END
+from tkinter.constants import CENTER
+from tkinter.constants import END
 from tkinter.constants import DISABLED
 from model import MyModel
 from handlers import get_day
@@ -52,12 +52,14 @@ class MyView:
         frame = Frame(self.window)
         frame.grid(row=3, column=0, columnspan=3)
 
-        list_of_tasks = ttk.Treeview(frame, selectmode='browse', height=10)
-        list_of_tasks.heading('#0', text='Tareas', anchor=CENTER)
-        list_of_tasks.grid(row=3, column=0, columnspan=3)
+        self.list_of_tasks = ttk.Treeview(frame, selectmode='browse', height=10)
+        self.list_of_tasks.heading('#0', text='Tareas', anchor=CENTER)
+        self.list_of_tasks.grid(row=3, column=0, columnspan=3)
 
-        sb = ttk.Scrollbar(frame, orient='vertical', command=list_of_tasks.yview)
+        sb = ttk.Scrollbar(frame, orient='vertical', command=self.list_of_tasks.yview)
         sb.grid(row=3, column=4, sticky='nse')
+
+        self.handler_tasks_list(self.list_of_tasks)
 
 
         #Buttons
@@ -75,12 +77,6 @@ class MyView:
         footer_label = Label(self.window, text='Made with love')
         footer_label.config(fg='white', bg='darkblue', font='Verdana, 6')
         footer_label.grid(row=5, column=0, sticky='we', columnspan=3)
-
-        #Handler Functions
-    def handler_create_task(self):
-        pass
-
-
 
     #ADD VIEW
     def open_add_view(self):
@@ -136,7 +132,7 @@ class MyView:
         day = datetime.today().day
         
         
-        self.cal = Calendar(self.calendar_window, selectmode='day', year=year, month=month, day=day)
+        self.cal = Calendar(self.calendar_window, selectmode='day',date_pattern='dd/mm/y' ,year=year, month=month, day=day)
         self.cal.grid(row=0, column=0)
 
         get_date_button = Button(self.calendar_window, text='Seleccionar', command=self.pick_date)
@@ -154,7 +150,18 @@ class MyView:
 
         self.task.create_task(self.name, self.date, self.type, self.desc)
         self.add_window.destroy()
+        self.handler_tasks_list(self.list_of_tasks)
 
+    def handler_tasks_list(self, tree):
+        day = get_day()
+        self.tree = tree
+        records = self.tree.get_children()
+        for r in records:
+            self.tree.delete(r)
+        list_of_tasks = self.task.get_tasks(day)
+        print(list_of_tasks)
+        for t in list_of_tasks:
+            self.tree.insert('', END, text = t)
 
 
 
