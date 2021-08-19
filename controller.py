@@ -4,8 +4,7 @@ from view import MyView
 
 class MyApp:
     def __init__(self, window):
-        self.window = window
-        MyView(self.window)
+        MyView(window)
 
 if __name__ == "__main__":
     root = Tk()

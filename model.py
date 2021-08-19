@@ -34,12 +34,8 @@ class MyModel:
             con.close()
 
     def create_task(self, name, date, type, desc):
-        self.name = name
-        self.date = date
-        self.type = type
-        self.desc = desc
         
-        parameters = (self.name, self.date, self.type, self.desc)
+        parameters = (name, date, type, desc)
         try:
             query = 'INSERT INTO mytasks VALUES(NULL, ?, ?, ?, ?)'
             self.run_query(query, parameters)
@@ -47,33 +43,29 @@ class MyModel:
             return Error()
 
     def read(self, id):
-        self.id = id
         try:
-            query = f'SELECT name, type, date, description FROM mytasks WHERE id = "{self.id}"'
+            query = f'SELECT name, type, date, description FROM mytasks WHERE id = "{id}"'
             self.run_query(query)
         except Error:
             return Error()
 
     def update(self, id, new_values):
-        self.id = id
-        self.new_values = new_values
         try:
-            query = f'UPDATE mytasks SET name = "{self.new_values[0]}", type = "{self.new_values[1]}", date = "{self.new_values[2]}", description = "{self.new_values[3]}" WHERE id = "{self.id}"'
+            query = f'UPDATE mytasks SET name = "{new_values[0]}", type = "{new_values[1]}", date = "{new_values[2]}", description = "{self.new_values[3]}" WHERE id = "{id}"'
             result = self.run_query(query)
         except Error:
             return Error()
 
     def delete(self, id):
-        self. id = id
         try:
-            query = f'DELETE from mytasks WHERE id = "{self.id}"'
+            query = f'DELETE from mytasks WHERE id = "{id}"'
             result = self.run_query(query)
         except Error:
             return Error()
     
     def get_tasks(self, day):
         try:
-            query = f'SELECT name FROM mytasks WHERE date = "{day}"'
+            query = f'SELECT id, name FROM mytasks WHERE date = "{day}"'
             result = self.run_query(query)
             return result
         except Error:
