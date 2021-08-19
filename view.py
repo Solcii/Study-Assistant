@@ -7,18 +7,19 @@ from tkinter import Frame
 from tkinter import Entry
 from tkinter import Text
 from tkinter import ttk
+from tkinter import messagebox
 from tkcalendar import Calendar
 from datetime import datetime
 from tkinter.constants import CENTER
 from tkinter.constants import END
 from tkinter.constants import DISABLED
-from handlers import VisualHandler
+from handlers import Handler
 from functions import get_day
 
 
 class MyView:
     def __init__(self, window):
-        self.visual_handler = VisualHandler()
+        self.handler = Handler()
         self.window = window
         self.window.title('K.I.S.S.')
         Tk.iconbitmap(self.window, default='kicon.ico')
@@ -26,7 +27,7 @@ class MyView:
 
         #PRINCIPAL VIEW
         #Header
-        self.visual_handler.show_header(self.window)
+        self.handler.show_header(self.window)
 
         #Date view
         yesterday_button = Button(self.window, text = '🡰',command = lambda: print('Hola'))
@@ -57,7 +58,7 @@ class MyView:
         sb = ttk.Scrollbar(frame, orient='vertical', command=self.list_of_tasks.yview)
         sb.grid(row=3, column=4, sticky='nse')
 
-        self.visual_handler.handler_tasks_list(self.list_of_tasks)
+        self.handler.handler_tasks_list(self.list_of_tasks)
 
 
         #Buttons
@@ -72,7 +73,7 @@ class MyView:
         delete_button.grid(row=4, column=2, sticky='we')
 
         #Footer
-        self.visual_handler.show_footer(self.window, 5)
+        self.handler.show_footer(self.window, 5)
 
     #ADD VIEW
     def open_add_view(self):
@@ -80,7 +81,7 @@ class MyView:
         add_window.title('Add task')
 
         #Header
-        self.visual_handler.show_header(add_window)
+        self.handler.show_header(add_window)
 
         #Inputs
         task_name_label = Label(add_window, text='Titulo: ')
@@ -88,13 +89,13 @@ class MyView:
         task_name_input = Entry(add_window)
         task_name_input.grid(row=1, column=1, columnspan=2)
 
-        self.date_selected = StringVar()
+        date_selected = StringVar()
 
         task_date_label = Label(add_window, text='Fecha: ')
         task_date_label.grid(row=2, column=0)
-        task_date_input = Entry(add_window, state=DISABLED, textvariable=self.date_selected)
+        task_date_input = Entry(add_window, state=DISABLED, textvariable=date_selected)
         task_date_input.grid(row=2, column=1)
-        task_date_button = Button(add_window, text='Select date', command=self.open_calendar)
+        task_date_button = Button(add_window, text='Select date', command= lambda: self.open_calendar(date_selected))
         task_date_button.grid(row=2, column=2)
 
         task_type_label = Label(add_window, text='Tipo: ')
@@ -109,46 +110,55 @@ class MyView:
         task_desc_input.grid(row=5, column=0, columnspan=3)
 
         #Button
-        save_button = Button(add_window, text='SAVE', command=lambda: self.visual_handler.handler_add(add_window, task_name_input, task_date_input, task_type_input, task_desc_input, self.list_of_tasks))
+        save_button = Button(add_window, text='SAVE', command=lambda: self.handler.handler_add(add_window, task_name_input, task_date_input, task_type_input, task_desc_input, self.list_of_tasks))
         save_button.grid(row=6, column=0, sticky='we', columnspan=3)
 
         #Footer
-        self.visual_handler.show_footer(add_window, 7)
+        self.handler.show_footer(add_window, 7)
 
     
     #READ VIEW
     def open_read_view(self):
+        try: 
+            self.list_of_tasks.item(self.list_of_tasks.selection())['text'][0]
+        except IndexError as e:
+            messagebox.showinfo(message='Seleccione una tarea', title='')
+            return
+        
+        id = self.list_of_tasks.selection()[0]
+        values = self.handler.handler_read(id)
+        name = values[0]
+        date = values[1]
+        type = values[2]
+        desc = values[3]
         read_window = Toplevel()
         read_window.title('Your task')
 
         #Header
-        self.visual_handler.show_header(read_window)
+        self.handler.show_header(read_window)
 
         #Inputs
         task_name_label = Label(read_window, text='Titulo: ')
         task_name_label.grid(row=1, column=0)
-        self.task_name_input = Entry(read_window, state=DISABLED)
-        self.task_name_input.grid(row=1, column=1, columnspan=2)
-
-        self.date_selected = StringVar()
+        task_name_input = Entry(read_window, textvariable = StringVar(read_window, value=name) , state='readonly')
+        task_name_input.grid(row=1, column=1, columnspan=2)
 
         task_date_label = Label(read_window, text='Fecha: ')
         task_date_label.grid(row=2, column=0)
-        self.task_date_input = Entry(read_window, state=DISABLED, textvariable=self.date_selected)
-        self.task_date_input.grid(row=2, column=1)
-        self.task_date_button = Button(read_window, text='Select date', command=self.open_calendar, state=DISABLED)
-        self.task_date_button.grid(row=2, column=2)
+        task_date_input = Entry(read_window, textvariable = StringVar(read_window, value=date), state='readonly')
+        task_date_input.grid(row=2, column=1, columnspan=2)
 
         task_type_label = Label(read_window, text='Tipo: ')
         task_type_label.grid(row=3, column=0)
-        self.task_type_input = ttk.Combobox(read_window, state='readonly')
-        self.task_type_input['values'] = ['Examen final', 'Examen parcial', 'Entrega', 'Lectura', 'Otro']
-        self.task_type_input.grid(row=3, column=1, columnspan=2)
+        task_type_input = Entry(read_window, textvariable = StringVar(read_window, value=type) , state='readonly')
+        task_type_input.grid(row=3, column=1, columnspan=2)
 
         task_desc_label = Label(read_window, text='Descripcion: ')
         task_desc_label.grid(row=4, column=0)
-        self.task_desc_input = Text(read_window, width=30, height=5, state=DISABLED)
-        self.task_desc_input.grid(row=5, column=0, columnspan=3)
+        task_desc_input = Text(read_window, width=30, height=5)
+        task_desc_input.insert(END, desc)
+        task_desc_input.config(state=DISABLED)
+        task_desc_input.grid(row=5, column=0, columnspan=3)
 
         #Button
         home_button = Button(read_window, text='HOME')
@@ -161,12 +171,11 @@ class MyView:
         delete_button.grid(row=6, column=2, sticky='we')
 
         #Footer
-        self.visual_handler.show_footer(read_window, 7)
+        self.handler.show_footer(read_window, 7)
 
     
-    
-    #HANDLER FUNCTIONS
-    def open_calendar(self):
+    #CALENDAR FUNCTIONS
+    def open_calendar(self, date):
         calendar_window = Toplevel()
         calendar_window.title('Select a date')
 
@@ -174,16 +183,15 @@ class MyView:
         month = datetime.today().month
         day = datetime.today().day
         
-        
-        self.cal = Calendar(calendar_window, selectmode='day',date_pattern='dd/mm/y' ,year=year, month=month, day=day)
-        self.cal.grid(row=0, column=0)
+        cal = Calendar(calendar_window, selectmode='day',date_pattern='dd/mm/y' ,year=year, month=month, day=day)
+        cal.grid(row=0, column=0)
 
-        get_date_button = Button(calendar_window, text='Seleccionar', command= lambda: self.pick_date(calendar_window))
+        get_date_button = Button(calendar_window, text='Seleccionar', command= lambda: self.pick_date(calendar_window, cal, date))
         get_date_button.grid(row=1, column=0)
 
-    def pick_date(self, window):
-        self.date_selected.set(self.cal.get_date())
-        self.window.destroy()
+    def pick_date(self, window, cal, date):
+        date.set(cal.get_date())
+        window.destroy()
 
     
 

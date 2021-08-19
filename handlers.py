@@ -3,7 +3,7 @@ from tkinter.constants import END
 from model import MyModel
 from functions import get_day
 
-class VisualHandler:
+class Handler:
     def __init__(self):
         self.task_manager = MyModel()
 
@@ -23,10 +23,10 @@ class VisualHandler:
         for r in records:
             tree.delete(r)
         list_of_tasks = self.task_manager.get_tasks(day)
-        print(list_of_tasks)
         for t in list_of_tasks:
-            tree.insert('', END, text = t[1])
-    
+            my_iid = t[0]
+            tree.insert('', END, text = t[1], iid = my_iid)
+
     def handler_add(self, add_window, ninput, dainput, tinput, deinput, tree):
         name = ninput.get()
         date = dainput.get()
@@ -36,5 +36,11 @@ class VisualHandler:
         self.task_manager.create_task(name, date, type, desc)
         add_window.destroy()
         self.handler_tasks_list(tree)
+    
+    def handler_read(self, id):
+        results = self.task_manager.read(id)
+        values = results[0]
+        return values
+
 
 

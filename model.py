@@ -44,8 +44,9 @@ class MyModel:
 
     def read(self, id):
         try:
-            query = f'SELECT name, type, date, description FROM mytasks WHERE id = "{id}"'
-            self.run_query(query)
+            query = f'SELECT name, date, type, description FROM mytasks WHERE id = "{id}"'
+            results = self.run_query(query)
+            return results
         except Error:
             return Error()
 
