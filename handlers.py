@@ -1,4 +1,5 @@
 from tkinter import Label
+from tkinter import messagebox
 from tkinter.constants import END
 from model import MyModel
 from functions import get_day
@@ -36,11 +37,28 @@ class Handler:
         self.task_manager.create_task(name, date, type, desc)
         add_window.destroy()
         self.handler_tasks_list(tree)
+        messagebox.showinfo(message='Task successfully created')
     
     def handler_read(self, id):
         results = self.task_manager.read(id)
         values = results[0]
         return values
+
+    def handler_delete(self, id, tree):
+        self.task_manager.delete(id)
+        self.handler_tasks_list(tree)
+        messagebox.showinfo(message='Task successfully deleted')
+    
+    def handler_edit(self, id, ninput, dainput, tinput, deinput, tree, window):
+        name = ninput.get()
+        date = dainput.get()
+        type = tinput.get()
+        desc = deinput.get(1.0, END)
+        self.task_manager.update(id, name, date, type, desc)
+        window.destroy()
+        self.handler_tasks_list(tree)
+        messagebox.showinfo(message='Task successfully edited')
+
 
 
 

@@ -50,9 +50,9 @@ class MyModel:
         except Error:
             return Error()
 
-    def update(self, id, new_values):
+    def update(self, id, nname, ndate, ntype, ndesc):
         try:
-            query = f'UPDATE mytasks SET name = "{new_values[0]}", type = "{new_values[1]}", date = "{new_values[2]}", description = "{self.new_values[3]}" WHERE id = "{id}"'
+            query = f'UPDATE mytasks SET name = "{nname}", date = "{ndate}", type = "{ntype}", description = "{ndesc}" WHERE id = "{id}"'
             result = self.run_query(query)
         except Error:
             return Error()
