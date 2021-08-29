@@ -16,6 +16,7 @@ from tkinter.constants import DISABLED
 from tkinter.constants import NORMAL
 from handlers import Handler
 from functions import get_day
+from functions import get_day_name
 from functions import check_selection
 from functions import get_index
 
@@ -33,13 +34,16 @@ class MyView:
         self.handler.show_header(self.window)
 
         #Date view
-        yesterday_button = Button(self.window, text = '🡰',command = lambda: print('Hola'))
+        yesterday_button = Button(self.window, text = '🡰',command = lambda: print('Yesterday'))
         yesterday_button.grid(row=1, column=0, rowspan=2)
 
-        tomorrow_button = Button(self.window, text='🡲',command = lambda: print('Hola'))
+        tomorrow_button = Button(self.window, text='🡲',command = lambda: print('Tomorrow'))
         tomorrow_button.grid(row=1, column=2, rowspan=2)
+
         
-        day_label = Label(self.window, text='HOY')
+        day_name = get_day_name()
+        
+        day_label = Label(self.window, textvariable=StringVar(self.window, value=day_name))
         day_label.config(fg='blue', bg='#fafafa', font='Verdana, 8')
         day_label.grid(row=1, column=1)
         
@@ -55,7 +59,7 @@ class MyView:
         frame.grid(row=3, column=0, columnspan=3)
 
         self.list_of_tasks = ttk.Treeview(frame, selectmode='browse', height=10)
-        self.list_of_tasks.heading('#0', text='Tareas', anchor=CENTER)
+        self.list_of_tasks.heading('#0', text='Tasks', anchor=CENTER)
         self.list_of_tasks.grid(row=3, column=0, columnspan=3)
 
         sb = ttk.Scrollbar(frame, orient='vertical', command=self.list_of_tasks.yview)
@@ -87,27 +91,27 @@ class MyView:
         self.handler.show_header(add_window)
 
         #Inputs
-        task_name_label = Label(add_window, text='Titulo: ')
+        task_name_label = Label(add_window, text='Title: ')
         task_name_label.grid(row=1, column=0)
         task_name_input = Entry(add_window)
         task_name_input.grid(row=1, column=1, columnspan=2)
 
         date_selected = StringVar()
 
-        task_date_label = Label(add_window, text='Fecha: ')
+        task_date_label = Label(add_window, text='Date: ')
         task_date_label.grid(row=2, column=0)
         task_date_input = Entry(add_window, state=DISABLED, textvariable=date_selected)
         task_date_input.grid(row=2, column=1)
         task_date_button = Button(add_window, text='Select date', command= lambda: self.open_calendar(date_selected))
         task_date_button.grid(row=2, column=2)
 
-        task_type_label = Label(add_window, text='Tipo: ')
+        task_type_label = Label(add_window, text='Type: ')
         task_type_label.grid(row=3, column=0)
         task_type_input = ttk.Combobox(add_window, state='readonly')
-        task_type_input['values'] = ['Examen final', 'Examen parcial', 'Entrega', 'Lectura', 'Otro']
+        task_type_input['values'] = ['Final exam', 'Midterm exam', 'Homework', 'Reading', 'Other']
         task_type_input.grid(row=3, column=1, columnspan=2)
 
-        task_desc_label = Label(add_window, text='Descripcion: ')
+        task_desc_label = Label(add_window, text='Description: ')
         task_desc_label.grid(row=4, column=0)
         task_desc_input = Text(add_window, width=30, height=5)
         task_desc_input.grid(row=5, column=0, columnspan=3)
@@ -136,22 +140,22 @@ class MyView:
             self.handler.show_header(read_window)
 
             #Inputs
-            task_name_label = Label(read_window, text='Titulo: ')
+            task_name_label = Label(read_window, text='Title: ')
             task_name_label.grid(row=1, column=0)
             task_name_input = Entry(read_window, textvariable = StringVar(read_window, value=name) , state=DISABLED)
             task_name_input.grid(row=1, column=1, columnspan=2)
 
-            task_date_label = Label(read_window, text='Fecha: ')
+            task_date_label = Label(read_window, text='Date: ')
             task_date_label.grid(row=2, column=0)
             task_date_input = Entry(read_window, textvariable = StringVar(read_window, value=date), state=DISABLED)
             task_date_input.grid(row=2, column=1, columnspan=2)
 
-            task_type_label = Label(read_window, text='Tipo: ')
+            task_type_label = Label(read_window, text='Type: ')
             task_type_label.grid(row=3, column=0)
             task_type_input = Entry(read_window, textvariable = StringVar(read_window, value=type) , state=DISABLED)
             task_type_input.grid(row=3, column=1, columnspan=2)
 
-            task_desc_label = Label(read_window, text='Descripcion: ')
+            task_desc_label = Label(read_window, text='Description: ')
             task_desc_label.grid(row=4, column=0)
             task_desc_input = Text(read_window, width=30, height=5)
             task_desc_input.insert(END, desc)
@@ -184,7 +188,7 @@ class MyView:
         cal = Calendar(calendar_window, selectmode='day',date_pattern='dd/mm/y' ,year=year, month=month, day=day)
         cal.grid(row=0, column=0)
 
-        get_date_button = Button(calendar_window, text='Seleccionar', command= lambda: self.pick_date(calendar_window, cal, date))
+        get_date_button = Button(calendar_window, text='Select', command= lambda: self.pick_date(calendar_window, cal, date))
         get_date_button.grid(row=1, column=0)
 
     def pick_date(self, window, cal, date):
@@ -225,14 +229,14 @@ class MyView:
         self.handler.show_header(edit_window)
 
         #Inputs
-        task_name_label = Label(edit_window, text='Titulo: ')
+        task_name_label = Label(edit_window, text='Title: ')
         task_name_label.grid(row=1, column=0)
         task_name_input = Entry(edit_window, textvariable = StringVar(edit_window, value=name))
         task_name_input.grid(row=1, column=1, columnspan=2)
 
         date_selected = StringVar(value=date)
 
-        task_date_label = Label(edit_window, text='Fecha: ')
+        task_date_label = Label(edit_window, text='Date: ')
         task_date_label.grid(row=2, column=0)
         task_date_input = Entry(edit_window, state=DISABLED, textvariable = date_selected)
         task_date_input.grid(row=2, column=1)
@@ -240,10 +244,10 @@ class MyView:
         task_date_button.grid(row=2, column=2)
 
 
-        task_type_label = Label(edit_window, text='Tipo: ')
+        task_type_label = Label(edit_window, text='Type: ')
         task_type_label.grid(row=3, column=0)
         task_type_input = ttk.Combobox(edit_window, state='readonly')
-        task_type_input['values'] = ['Examen final', 'Examen parcial', 'Entrega', 'Lectura', 'Otro']
+        task_type_input['values'] = ['Final exam', 'Midterm exam', 'Homework', 'Reading', 'Other']
         index_type = get_index(type)
         task_type_input.current(index_type)
 
@@ -251,7 +255,7 @@ class MyView:
         #task_type_input = Entry(edit_window, textvariable = StringVar(edit_window, value=type))
         task_type_input.grid(row=3, column=1, columnspan=2)
 
-        task_desc_label = Label(edit_window, text='Descripcion: ')
+        task_desc_label = Label(edit_window, text='Description: ')
         task_desc_label.grid(row=4, column=0)
         task_desc_input = Text(edit_window, width=30, height=5)
         task_desc_input.insert(END, desc)

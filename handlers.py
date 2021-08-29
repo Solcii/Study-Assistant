@@ -1,8 +1,10 @@
+from datetime import datetime, timedelta
 from tkinter import Label
 from tkinter import messagebox
 from tkinter.constants import END
 from model import MyModel
 from functions import get_day
+from functions import input_validation
 
 class Handler:
     def __init__(self):
@@ -34,10 +36,14 @@ class Handler:
         type = tinput.get()
         desc = deinput.get(1.0, END)
 
-        self.task_manager.create_task(name, date, type, desc)
-        add_window.destroy()
-        self.handler_tasks_list(tree)
-        messagebox.showinfo(message='Task successfully created')
+
+        if input_validation(name, date, type) == True:
+            self.task_manager.create_task(name, date, type, desc)
+            add_window.destroy()
+            self.handler_tasks_list(tree)
+            messagebox.showinfo(message='Task successfully created')
+        else:
+            messagebox.showinfo(message='Name, date and type are required.')
     
     def handler_read(self, id):
         results = self.task_manager.read(id)

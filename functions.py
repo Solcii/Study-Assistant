@@ -1,10 +1,15 @@
 from tkinter import messagebox
-from datetime import datetime
+from datetime import date, datetime
+import re
 
 def get_day():
     today = datetime.now()
     format = today.strftime('%d/%m/%Y')
     return format
+
+def get_day_name():
+    day = datetime.today().strftime('%A')
+    return day
 
 def check_selection(tree):
     try: 
@@ -15,7 +20,7 @@ def check_selection(tree):
         return
 
 def get_index(type):
-    values = ['Examen final', 'Examen parcial', 'Entrega', 'Lectura', 'Otro']
+    values = ['Final exam', 'Midterm exam', 'Homework', 'Reading', 'Other']
     if type == values[0]:
         return 0
     elif type == values[1]:
@@ -26,3 +31,8 @@ def get_index(type):
         return 3
     else:
         return 4
+
+def input_validation(name, date, type):
+    r_name = re.search(r'^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$', name)
+    if r_name != None and len(date) != 0 and len(type) != 0:
+        return True
