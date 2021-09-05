@@ -2,14 +2,25 @@ from tkinter import messagebox
 from datetime import date, datetime
 import re
 
-def get_day():
+def get_day(name_day):
     today = datetime.now()
     format = today.strftime('%d/%m/%Y')
+    
+    name_day.set(today.strftime('%A'))
+    return format
+
+def format_day(day):
+    format = day.strftime('%d/%m/%Y')
     return format
 
 def get_day_name():
     day = datetime.today().strftime('%A')
     return day
+
+def get_day_name_from_strvar(next_day, name_day):
+    day_name = next_day.strftime('%A')
+    name_day.set(day_name)
+
 
 def check_selection(tree):
     try: 

@@ -1,3 +1,4 @@
+from calendar import day_name
 from tkinter import Tk
 from tkinter import StringVar
 from tkinter import Toplevel
@@ -34,24 +35,37 @@ class MyView:
         self.handler.show_header(self.window)
 
         #Date view
-        yesterday_button = Button(self.window, text = '🡰',command = lambda: print('Yesterday'))
+        yesterday_button = Button(self.window, text = '🡰',command = lambda: self.handler.handler_day_before(day, day_name, self.list_of_tasks))
         yesterday_button.grid(row=1, column=0, rowspan=2)
 
-        tomorrow_button = Button(self.window, text='🡲',command = lambda: print('Tomorrow'))
+        tomorrow_button = Button(self.window, text='🡲',command = lambda: self.handler.handler_next_day(day, day_name, self.list_of_tasks))
         tomorrow_button.grid(row=1, column=2, rowspan=2)
 
         
-        day_name = get_day_name()
-        
-        day_label = Label(self.window, textvariable=StringVar(self.window, value=day_name))
+        #day_name = get_day_name()
+        #day_name = StringVar(value=get_day_name())
+        day_name = StringVar()
+
+        day_label = Label(self.window, textvariable=day_name)
         day_label.config(fg='blue', bg='#fafafa', font='Verdana, 8')
         day_label.grid(row=1, column=1)
         
-        day = get_day()
+        """day_label = Label(self.window, textvariable=StringVar(self.window, value=day_name))
+        day_label.config(fg='blue', bg='#fafafa', font='Verdana, 8')
+        day_label.grid(row=1, column=1)"""
+        
+        """day = get_day()
         
         data_label = Label(self.window, text=day)
         data_label.config(fg='blue', bg='#fafafa', font='Verdana, 8')
+        data_label.grid(row=2, column=1)"""
+
+        day = StringVar(value=get_day(day_name))
+        data_label = Label(self.window, textvariable=day)
+        data_label.config(fg='blue', bg='#fafafa', font='Verdana, 8')
         data_label.grid(row=2, column=1)
+
+
 
         #List tasks
 
@@ -65,25 +79,25 @@ class MyView:
         sb = ttk.Scrollbar(frame, orient='vertical', command=self.list_of_tasks.yview)
         sb.grid(row=3, column=4, sticky='nse')
 
-        self.handler.handler_tasks_list(self.list_of_tasks)
+        self.handler.handler_tasks_list(day, self.list_of_tasks)
 
 
         #Buttons
 
-        add_button = Button(text='ADD', command=lambda: self.open_add_view(self.list_of_tasks))
+        add_button = Button(text='ADD', command=lambda: self.open_add_view(self.list_of_tasks, day))
         add_button.grid(row=4, column=0, sticky='we')
 
-        read_button = Button(text='READ', command=lambda: self.open_read_view(self.list_of_tasks))
+        read_button = Button(text='READ', command=lambda: self.open_read_view(self.list_of_tasks, day))
         read_button.grid(row=4, column=1, sticky='we')
 
-        delete_button = Button(text='DELETE', command=lambda: self.delete_from_home(self.list_of_tasks))
+        delete_button = Button(text='DELETE', command=lambda: self.delete_from_home(self.list_of_tasks, day))
         delete_button.grid(row=4, column=2, sticky='we')
 
         #Footer
         self.handler.show_footer(self.window, 5)
 
     #ADD VIEW
-    def open_add_view(self, tree):
+    def open_add_view(self, tree, str_value_of_day):
         add_window = Toplevel()
         add_window.title('Add task')
 
@@ -117,7 +131,7 @@ class MyView:
         task_desc_input.grid(row=5, column=0, columnspan=3)
 
         #Button
-        save_button = Button(add_window, text='SAVE', command=lambda: self.handler.handler_add(add_window, task_name_input, task_date_input, task_type_input, task_desc_input, tree))
+        save_button = Button(add_window, text='SAVE', command=lambda: self.handler.handler_add(add_window, task_name_input, task_date_input, task_type_input, task_desc_input, tree, str_value_of_day))
         save_button.grid(row=6, column=0, sticky='we', columnspan=3)
 
         #Footer
@@ -125,7 +139,7 @@ class MyView:
 
     
     #READ VIEW
-    def open_read_view(self, tree):
+    def open_read_view(self, tree, str_value_of_day):
         if check_selection(tree) == True:
             id = tree.selection()[0]
             values = self.handler.handler_read(id)
@@ -166,10 +180,10 @@ class MyView:
             home_button = Button(read_window, text='HOME', command=lambda: read_window.destroy())
             home_button.grid(row=6, column=0, sticky='we')
 
-            edit_button = Button(read_window, text='EDIT', command=lambda: self.open_edit_window(read_window, tree))
+            edit_button = Button(read_window, text='EDIT', command=lambda: self.open_edit_window(read_window, tree, str_value_of_day))
             edit_button.grid(row=6, column=1, sticky='we')
 
-            delete_button = Button(read_window, text='DELETE', command=lambda: self.delete_from_read(tree, read_window))
+            delete_button = Button(read_window, text='DELETE', command=lambda: self.delete_from_read(tree, read_window, str_value_of_day))
             delete_button.grid(row=6, column=2, sticky='we')
 
             #Footer
@@ -195,25 +209,25 @@ class MyView:
         date.set(cal.get_date())
         window.destroy()
 
-    def delete_from_home(self, tree):
+    def delete_from_home(self, tree, str_value_of_day):
         if check_selection(tree) == True:
             conf = messagebox.askyesno(message='Task will be deleted. Are you sure?', title='Delete task')
 
             if conf == True:
                 id = tree.selection()[0]
-                self.handler.handler_delete(id, tree)
+                self.handler.handler_delete(id, tree, str_value_of_day)
     
-    def delete_from_read(self, tree, window):
+    def delete_from_read(self, tree, window, str_value_of_day):
         conf = messagebox.askyesno(message='Task will be deleted. Are you sure?', title='Delete task')
 
         if conf == True:
             id = tree.selection()[0]
-            self.handler.handler_delete(id, tree)
+            self.handler.handler_delete(id, tree, str_value_of_day)
             window.destroy()
 
     
     #EDIT OPTION
-    def open_edit_window(self, window, tree):
+    def open_edit_window(self, window, tree, str_value_of_day):
         window.destroy()
         edit_window = Toplevel()
         edit_window.title('Edit task')
@@ -262,7 +276,7 @@ class MyView:
         task_desc_input.grid(row=5, column=0, columnspan=3)    
 
         #Button
-        save_button = Button(edit_window, text='SAVE', command=lambda: self.handler.handler_edit(id, task_name_input, task_date_input, task_type_input, task_desc_input, tree, edit_window))
+        save_button = Button(edit_window, text='SAVE', command=lambda: self.handler.handler_edit(id, task_name_input, task_date_input, task_type_input, task_desc_input, tree, edit_window, str_value_of_day))
         save_button.grid(row=6, column=0, sticky='we', columnspan=3)
 
         #Footer

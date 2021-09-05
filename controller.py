@@ -10,3 +10,4 @@ if __name__ == "__main__":
     root = Tk()
     app = MyApp(root)
     root.mainloop()
+    

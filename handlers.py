@@ -1,9 +1,12 @@
-from datetime import datetime, timedelta
+from datetime import datetime
+from datetime import timedelta
 from tkinter import Label
 from tkinter import messagebox
 from tkinter.constants import END
 from model import MyModel
 from functions import get_day
+from functions import format_day
+from functions import get_day_name_from_strvar
 from functions import input_validation
 
 class Handler:
@@ -20,8 +23,8 @@ class Handler:
         footer_label.config(fg='white', bg='darkblue', font='Verdana, 6')
         footer_label.grid(row=row, column=0, sticky='we', columnspan=3)
 
-    def handler_tasks_list(self, tree):
-        day = get_day()
+    def handler_tasks_list(self, date, tree):
+        day = date.get()
         records = tree.get_children()
         for r in records:
             tree.delete(r)
@@ -30,7 +33,7 @@ class Handler:
             my_iid = t[0]
             tree.insert('', END, text = t[1], iid = my_iid)
 
-    def handler_add(self, add_window, ninput, dainput, tinput, deinput, tree):
+    def handler_add(self, add_window, ninput, dainput, tinput, deinput, tree, str_value_of_day):
         name = ninput.get()
         date = dainput.get()
         type = tinput.get()
@@ -40,7 +43,7 @@ class Handler:
         if input_validation(name, date, type) == True:
             self.task_manager.create_task(name, date, type, desc)
             add_window.destroy()
-            self.handler_tasks_list(tree)
+            self.handler_tasks_list(str_value_of_day, tree)
             messagebox.showinfo(message='Task successfully created')
         else:
             messagebox.showinfo(message='Name, date and type are required.')
@@ -50,20 +53,42 @@ class Handler:
         values = results[0]
         return values
 
-    def handler_delete(self, id, tree):
+    def handler_delete(self, id, tree, str_value_of_day):
         self.task_manager.delete(id)
-        self.handler_tasks_list(tree)
+        self.handler_tasks_list(str_value_of_day, tree)
         messagebox.showinfo(message='Task successfully deleted')
     
-    def handler_edit(self, id, ninput, dainput, tinput, deinput, tree, window):
+    def handler_edit(self, id, ninput, dainput, tinput, deinput, tree, window, str_value_of_day):
         name = ninput.get()
         date = dainput.get()
         type = tinput.get()
         desc = deinput.get(1.0, END)
-        self.task_manager.update(id, name, date, type, desc)
-        window.destroy()
-        self.handler_tasks_list(tree)
-        messagebox.showinfo(message='Task successfully edited')
+
+        if input_validation(name, date, type) == True:
+            self.task_manager.update(id, name, date, type, desc)
+            window.destroy()
+            self.handler_tasks_list(str_value_of_day, tree)
+            messagebox.showinfo(message='Task successfully edited')
+        else:
+            messagebox.showinfo(message='Name, date and type are required.')
+
+    def handler_next_day(self, date, name_day, tree):
+        day = date.get()
+        today = datetime.strptime(day, '%d/%m/%Y')
+        next_day = today + timedelta(days=1)
+        date.set(format_day(next_day))
+        get_day_name_from_strvar(next_day, name_day)
+        self.handler_tasks_list(date, tree)
+
+    def handler_day_before(self, date, name_day, tree):
+        day = date.get()
+        today = datetime.strptime(day, '%d/%m/%Y')
+        day_before = today - timedelta(days=1)
+        date.set(format_day(day_before))
+        get_day_name_from_strvar(day_before, name_day)
+        self.handler_tasks_list(date, tree)
+
+
 
 
 
