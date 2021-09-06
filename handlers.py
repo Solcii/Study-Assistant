@@ -1,10 +1,10 @@
 from datetime import datetime
 from datetime import timedelta
 from tkinter import Label
+from tkinter import PhotoImage
 from tkinter import messagebox
 from tkinter.constants import END
 from model import MyModel
-from functions import get_day
 from functions import format_day
 from functions import get_day_name_from_strvar
 from functions import input_validation
@@ -14,13 +14,13 @@ class Handler:
         self.task_manager = MyModel()
 
     def show_header(self, window):
-        title_label = Label(window, text='Keep it simple, studying')
-        title_label.config(fg='white', bg='lightblue', font='Verdana, 15')
-        title_label.grid(row=0, column=0, sticky='we', columnspan=3)
+        self.header = PhotoImage(file='images/header_2.png').subsample(2)
+        label_header = Label(window, image=self.header)
+        label_header.grid(row=0, column=0, sticky='we', columnspan=3)
 
-    def show_footer(self, window, row):
-        footer_label = Label(window, text='Made with love')
-        footer_label.config(fg='white', bg='darkblue', font='Verdana, 6')
+    def show_footer(self, window, row):        
+        footer_label = Label(window, text='Made with love by Solcii')
+        footer_label.config(fg='white', bg='#9463AD', font=('Verdana', 7, 'italic'), borderwidth=5)
         footer_label.grid(row=row, column=0, sticky='we', columnspan=3)
 
     def handler_tasks_list(self, date, tree):
@@ -45,8 +45,6 @@ class Handler:
             add_window.destroy()
             self.handler_tasks_list(str_value_of_day, tree)
             messagebox.showinfo(message='Task successfully created')
-        else:
-            messagebox.showinfo(message='Name, date and type are required.')
     
     def handler_read(self, id):
         results = self.task_manager.read(id)
@@ -69,8 +67,6 @@ class Handler:
             window.destroy()
             self.handler_tasks_list(str_value_of_day, tree)
             messagebox.showinfo(message='Task successfully edited')
-        else:
-            messagebox.showinfo(message='Name, date and type are required.')
 
     def handler_next_day(self, date, name_day, tree):
         day = date.get()

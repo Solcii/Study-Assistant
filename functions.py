@@ -45,5 +45,11 @@ def get_index(type):
 
 def input_validation(name, date, type):
     r_name = re.search(r'^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$', name)
-    if r_name != None and len(date) != 0 and len(type) != 0:
-        return True
+
+    if r_name == None:
+        messagebox.showinfo(message="Please complete the Task's name only with valid characters", title='')
+    else:
+        if len(date) != 0 and len(type) != 0:
+            return True
+        else:
+            messagebox.showinfo(message='Name, date and type are required.')
