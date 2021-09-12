@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<head>
+    <title>Module View</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" href="https://img.icons8.com/fluency/16/000000/star.png">
+</head>
+
+<body bgcolor="#fafafa" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+        <tr bgcolor="#4bcec1">
+            <td style="text-align: center; padding: 10px; border-radius: 10px;">&nbsp;
+                <font color="#ffffff">&nbsp;<big><big><strong>VIEW</strong></big></big>
+                </font>
+            </td>
+        </tr>
+    </table>
+    <p></p>
+    <p>
+        <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+            <tr bgcolor="#ede2e5">
+                <td colspan=3 style="border-radius: 10px 10px 10px 0px; padding: 10px;">&nbsp;
+                    <big><strong>Modules</strong></big>
+                </td>
+            </tr>
+
+            <tr>
+                <td bgcolor="#ede2e5" style="border-radius: 0px 0px 10px 10px; padding: 10px;"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+                <td>&nbsp;</td>
+                <td width="100%">
+                    <table width="100%" summary="list">
+                        <tr>
+                            <td width="25%" valign=top><a href="tkinter.messagebox.html">tkinter.messagebox</a><br>
+                            </td>
+                            <td width="25%" valign=top><a href="tkinter.ttk.html">tkinter.ttk</a><br>
+                            </td>
+                            <td width="25%" valign=top></td>
+                            <td width="25%" valign=top></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <p>
+            <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+                <tr bgcolor="#d8c0c7">
+                    <td colspan=3 style="border-radius: 10px 10px 10px 0px; padding: 10px;">&nbsp;
+                        <font><big><strong>Classes</strong></big></font>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#d8c0c7" style="border-radius: 0px 0px 10px 10px; padding: 10px;"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+                    <td>&nbsp;</td>
+                    <td width="100%">
+                        <dl>
+                            <dt><font><a href="builtins.html#object">builtins.object</a>
+</font></dt>
+                            <dd>
+                                <dl>
+                                    <dt><font><a href="view.html#MyView">MyView</a>
+</font></dt></dl>
+                            </dd>
+                        </dl>
+                        <p>
+                            <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+                                <tr bgcolor="#f2f2f2">
+                                    <td colspan=3>&nbsp;<br>
+                                        <font><a name="MyView">class <strong>MyView</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font>
+                                    </td>
+                                </tr>
+
+                                <tr bgcolor="#f2f2f2">
+                                    <td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+                                    <td colspan=2><tt><a href="#MyView">MyView</a>(window)<br>
+&nbsp;<br>
+[ENG]&nbsp;Class&nbsp;in&nbsp;charge&nbsp;of&nbsp;showing&nbsp;all&nbsp;the&nbsp;visual&nbsp;elements&nbsp;of&nbsp;the&nbsp;application.<br>
+--------<br>
+[ESP]&nbsp;Clase&nbsp;encargada&nbsp;de&nbsp;mostrar&nbsp;todos&nbsp;los&nbsp;elementos&nbsp;visuales&nbsp;de&nbsp;la&nbsp;aplicación.<br>&nbsp;</tt></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td width="100%">Methods defined here:<br>
+                                        <dl><dt><a name="MyView-__init__"><strong>__init__</strong></a>(self, window)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;that&nbsp;allows&nbsp;the&nbsp;application's&nbsp;main&nbsp;screen&nbsp;to&nbsp;be&nbsp;displayed&nbsp;when&nbsp;the&nbsp;application&nbsp;is&nbsp;initialized,&nbsp;taking&nbsp;the&nbsp;current&nbsp;day&nbsp;as&nbsp;the&nbsp;default&nbsp;date&nbsp;and&nbsp;showing&nbsp; <br> the&nbsp;daily&nbsp;tasks&nbsp;in&nbsp;the&nbsp;list.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;que&nbsp;permite&nbsp;que&nbsp;al&nbsp;inicializar&nbsp;la&nbsp;aplicación&nbsp;se&nbsp;muestre&nbsp;la&nbsp;pantalla&nbsp;principal&nbsp;de&nbsp;la&nbsp;misma,&nbsp;tomando&nbsp;como&nbsp;fecha&nbsp;por&nbsp;defecto&nbsp;el&nbsp;día&nbsp;actual&nbsp;y&nbsp;mostrando&nbsp;en&nbsp; <br> el&nbsp;listado&nbsp;las&nbsp;tareas&nbsp;del&nbsp;día.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyView-delete_from_home"><strong>delete_from_home</strong></a>(self, tree, str_value_of_day)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;that&nbsp;allows&nbsp;the&nbsp;user&nbsp;to&nbsp;delete&nbsp;a&nbsp;task&nbsp;from&nbsp;the&nbsp;main&nbsp;window&nbsp;using&nbsp;the&nbsp;DELETE&nbsp;button,&nbsp;showing&nbsp;a&nbsp;confirmation&nbsp;message&nbsp;before&nbsp;proceeding&nbsp;to&nbsp;delete&nbsp;the&nbsp;task.&nbsp; <br> If&nbsp;a&nbsp;task&nbsp;was&nbsp;not&nbsp;previously&nbsp;selected,&nbsp;it&nbsp;returns&nbsp;an&nbsp;error&nbsp;message&nbsp;indicating&nbsp;to&nbsp;the&nbsp;user&nbsp;that&nbsp;to&nbsp;use&nbsp;the&nbsp;button&nbsp;they&nbsp;must&nbsp;first&nbsp;select&nbsp;a&nbsp;task&nbsp;from&nbsp; the&nbsp;list.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;que&nbsp;permite&nbsp;al&nbsp;usuario&nbsp;eliminar&nbsp;una&nbsp;tarea&nbsp;desde&nbsp;la&nbsp;ventana&nbsp;principal&nbsp;utilizando&nbsp;el&nbsp;boton&nbsp;DELETE,&nbsp;mostrando&nbsp;un&nbsp;mensaje&nbsp;de&nbsp;confirmación&nbsp;antes&nbsp;de&nbsp;proceder&nbsp; <br> a&nbsp;eliminar&nbsp;dicha&nbsp;tarea.&nbsp;Si&nbsp;no&nbsp;se&nbsp;seleccionó&nbsp;previamente&nbsp;una&nbsp;tarea,&nbsp;devuelve&nbsp;un&nbsp;mensaje&nbsp;de&nbsp;error&nbsp;indicando&nbsp;al&nbsp;usuario&nbsp;que&nbsp;para&nbsp;utilizar&nbsp;el&nbsp;boton&nbsp;primero&nbsp;debe&nbsp; <br> seleccionar&nbsp;una&nbsp;tarea&nbsp;de&nbsp;la&nbsp;lista.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyView-delete_from_read"><strong>delete_from_read</strong></a>(self, tree, window, str_value_of_day)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;that&nbsp;allows&nbsp;the&nbsp;user&nbsp;to&nbsp;delete&nbsp;a&nbsp;task&nbsp;from&nbsp;the&nbsp;read&nbsp;window&nbsp;using&nbsp;the&nbsp;DELETE&nbsp;button,&nbsp;showing&nbsp;a&nbsp;confirmation&nbsp;message&nbsp;before&nbsp;proceeding&nbsp;to&nbsp;delete&nbsp;said&nbsp;task.&nbsp; <br> If&nbsp;a&nbsp;task&nbsp;was&nbsp;not&nbsp;previously&nbsp;selected,&nbsp;it&nbsp;returns&nbsp;an&nbsp;error&nbsp;message&nbsp;indicating&nbsp;to&nbsp;the&nbsp;user&nbsp;that&nbsp;to&nbsp;use&nbsp;the&nbsp;button&nbsp;they&nbsp;must&nbsp;first&nbsp;select&nbsp;a&nbsp;task&nbsp;from&nbsp;the&nbsp;list.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;que&nbsp;permite&nbsp;al&nbsp;usuario&nbsp;eliminar&nbsp;una&nbsp;tarea&nbsp;desde&nbsp;la&nbsp;ventana&nbsp;de&nbsp;lectura&nbsp;utilizando&nbsp;el&nbsp;boton&nbsp;DELETE,&nbsp;mostrando&nbsp;un&nbsp;mensaje&nbsp;de&nbsp;confirmación&nbsp;antes&nbsp;de&nbsp;proceder&nbsp; <br> a&nbsp;eliminar&nbsp;dicha&nbsp;tarea.&nbsp;Si&nbsp;no&nbsp;se&nbsp;seleccionó&nbsp;previamente&nbsp;una&nbsp;tarea,&nbsp;devuelve&nbsp;un&nbsp;mensaje&nbsp;de&nbsp;error&nbsp;indicando&nbsp;al&nbsp;usuario&nbsp;que&nbsp;para&nbsp;utilizar&nbsp;el&nbsp;boton&nbsp;primero&nbsp;debe&nbsp; <br> seleccionar&nbsp;una&nbsp;tarea&nbsp;de&nbsp;la&nbsp;lista.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyView-open_add_view"><strong>open_add_view</strong></a>(self, tree, str_value_of_day)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;that&nbsp;when&nbsp;pressing&nbsp;the&nbsp;ADD&nbsp;button,&nbsp;opens&nbsp;the&nbsp;screen&nbsp;to&nbsp;add&nbsp;a&nbsp;new&nbsp;task,&nbsp;leaving&nbsp;the&nbsp;main&nbsp;screen&nbsp;in&nbsp;the&nbsp;background.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;que,&nbsp;al&nbsp;presionar&nbsp;el&nbsp;boton&nbsp;ADD,&nbsp;abre&nbsp;la&nbsp;pantalla&nbsp;de&nbsp;carga&nbsp;de&nbsp;datos,&nbsp;dejando&nbsp;la&nbsp;pantalla&nbsp;principal&nbsp;en&nbsp;segundo&nbsp;plano.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyView-open_calendar"><strong>open_calendar</strong></a>(self, date)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;that&nbsp;allows&nbsp;the&nbsp;user&nbsp;to&nbsp;select&nbsp;a&nbsp;date&nbsp;for&nbsp;the&nbsp;creation&nbsp;or&nbsp;edition&nbsp;of&nbsp;a&nbsp;task,&nbsp;from&nbsp;the&nbsp;opening&nbsp;of&nbsp;a&nbsp;window&nbsp;with&nbsp;a&nbsp;calendar.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;que&nbsp;permite&nbsp;al&nbsp;usuario&nbsp;seleccionar&nbsp;una&nbsp;fecha&nbsp;para&nbsp;la&nbsp;creación&nbsp;o&nbsp;edición&nbsp;de&nbsp;una&nbsp;tarea,&nbsp;a&nbsp;partir&nbsp;de&nbsp;la&nbsp;apertura&nbsp;de&nbsp;una&nbsp;ventana&nbsp;con&nbsp;un&nbsp;calendario.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyView-open_edit_window"><strong>open_edit_window</strong></a>(self, window, tree, str_value_of_day)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;that&nbsp;allows&nbsp;the&nbsp;user&nbsp;to&nbsp;access&nbsp;more&nbsp;information&nbsp;about&nbsp;a&nbsp;task.&nbsp;If&nbsp;a&nbsp;task&nbsp;was&nbsp;not&nbsp; previously&nbsp;selected,&nbsp;it&nbsp;returns&nbsp;an&nbsp;error&nbsp;message&nbsp;instructing&nbsp;the&nbsp;user&nbsp; <br> that&nbsp;to&nbsp;use&nbsp;the&nbsp;READ&nbsp;button&nbsp;they&nbsp;must&nbsp;first&nbsp;select&nbsp;a&nbsp;task&nbsp;from&nbsp;the&nbsp;list.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;que&nbsp;permite&nbsp;al&nbsp;usuario&nbsp;acceder&nbsp;a&nbsp;mayor&nbsp;información&nbsp;sobre&nbsp;una&nbsp;tarea.&nbsp;Si&nbsp;no&nbsp;se&nbsp;seleccionó&nbsp;previamente&nbsp;una&nbsp;tarea,&nbsp;devuelve&nbsp;un&nbsp;mensaje&nbsp;de&nbsp;error&nbsp;indicando&nbsp;al&nbsp; <br> usuario&nbsp;que&nbsp;para&nbsp;utilizar&nbsp;el&nbsp;boton&nbsp;READ&nbsp;primero&nbsp;debe&nbsp;seleccionar&nbsp;una&nbsp;tarea&nbsp;de&nbsp;la&nbsp;lista.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyView-open_read_view"><strong>open_read_view</strong></a>(self, tree, str_value_of_day)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;that,&nbsp;when&nbsp;pressing&nbsp;the&nbsp;READ&nbsp;button,&nbsp;opens&nbsp;the&nbsp;data&nbsp;reading&nbsp;screen&nbsp;of&nbsp;the&nbsp;selected&nbsp;task,&nbsp;leaving&nbsp;the&nbsp;main&nbsp;screen&nbsp;in&nbsp;the&nbsp;background.&nbsp;If&nbsp;a&nbsp;task&nbsp;was&nbsp;not&nbsp; <br> previously&nbsp;selected,&nbsp;it&nbsp;returns&nbsp;an&nbsp;error&nbsp;message&nbsp;indicating&nbsp;to&nbsp;the&nbsp;user&nbsp;that&nbsp;to&nbsp;use&nbsp;this&nbsp;button&nbsp;they&nbsp;must&nbsp;first&nbsp;select&nbsp;a&nbsp;task&nbsp;from&nbsp;the&nbsp;list.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;que,&nbsp;al&nbsp;presionar&nbsp;el&nbsp;boton&nbsp;READ,&nbsp;abre&nbsp;la&nbsp;pantalla&nbsp;de&nbsp;lectura&nbsp;de&nbsp;datos&nbsp;de&nbsp;la&nbsp;tarea&nbsp;seleccionada,&nbsp;dejando&nbsp;la&nbsp;pantalla&nbsp;principal&nbsp;en&nbsp;segundo&nbsp;plano.&nbsp; <br> Si&nbsp;no&nbsp;se&nbsp;seleccionó&nbsp;previamente&nbsp;una&nbsp;tarea,&nbsp;devuelve&nbsp;un&nbsp;mensaje&nbsp;de&nbsp;error&nbsp;indicando&nbsp;al&nbsp;usuario&nbsp;que&nbsp;para&nbsp;utilizar&nbsp;dicho&nbsp;boton&nbsp;primero&nbsp;debe&nbsp;seleccionar&nbsp;una&nbsp;tarea&nbsp;de&nbsp; <br> la&nbsp;lista.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyView-show_footer"><strong>show_footer</strong></a>(self, window, row)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;that&nbsp;displays&nbsp;the&nbsp;application&nbsp;footer&nbsp;in&nbsp;each&nbsp;of&nbsp;the&nbsp;secondary&nbsp;windows.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;que&nbsp;muestra&nbsp;el&nbsp;footer&nbsp;de&nbsp;la&nbsp;aplicación&nbsp;en&nbsp;cada&nbsp;una&nbsp;de&nbsp;las&nbsp;ventanas&nbsp;secundarias.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyView-show_header"><strong>show_header</strong></a>(self, window)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;that&nbsp;displays&nbsp;the&nbsp;application&nbsp;header&nbsp;in&nbsp;each&nbsp;of&nbsp;the&nbsp;secondary&nbsp;windows.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;que&nbsp;muestra&nbsp;el&nbsp;header&nbsp;de&nbsp;la&nbsp;aplicación&nbsp;en&nbsp;cada&nbsp;una&nbsp;de&nbsp;las&nbsp;ventanas&nbsp;secundarias.</tt></dd>
+                                        </dl>
+
+                                        <hr> Data descriptors defined here:<br>
+                                        <dl><dt><strong>__dict__</strong></dt>
+                                            <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+                                        </dl>
+                                        <dl><dt><strong>__weakref__</strong></dt>
+                                            <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+                                        </dl>
+                                    </td>
+                                </tr>
+                            </table>
+                    </td>
+                </tr>
+            </table>
+            <p>
+                <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+                    <tr bgcolor="#bb909c">
+                        <td colspan=3 style="border-radius: 10px 10px 10px 0px; padding: 10px;">&nbsp;
+                            <font><big><strong>Data</strong></big></font>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td bgcolor="#bb909c" style="border-radius: 0px 0px 10px 10px; padding: 10px;"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+                        <td>&nbsp;</td>
+                        <td width="100%"><strong>CENTER</strong> = 'center'<br>
+                            <strong>DISABLED</strong> = 'disabled'<br>
+                            <strong>END</strong> = 'end'</td>
+                    </tr>
+                </table>
+                <footer style="background-color: #afe9e3; padding: 1px; text-align: center; border-radius: 10px; ">
+                    <p>-- Made with❤️by Solcii --</p>
+                </footer>
+                <br>
+</body>
+
+</html>

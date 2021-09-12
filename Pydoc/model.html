@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<head>
+    <title>Module Model</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" href="https://img.icons8.com/fluency/16/000000/star.png">
+</head>
+
+<body bgcolor="#fafafa" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+
+    <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+        <tr bgcolor="#4bcec1">
+            <td style="text-align: center; padding: 10px; border-radius: 10px;">&nbsp;
+                <font color="#ffffff" face="helvetica, arial">&nbsp;<big><big><strong>MODEL</strong></big></big>
+                </font>
+            </td>
+        </tr>
+    </table>
+    <p></p>
+    <p>
+        <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+            <tr bgcolor="#ede2e5">
+                <td colspan=3 style="border-radius: 10px 10px 10px 0px; padding: 10px;">&nbsp;
+                    <big><strong>Modules</strong></big>
+                </td>
+            </tr>
+
+            <tr>
+                <td bgcolor="#ede2e5" style="border-radius: 0px 0px 10px 10px; padding: 10px;"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+                <td>&nbsp;</td>
+                <td width="100%">
+                    <table width="100%" summary="list">
+                        <tr>
+                            <td width="25%" valign=top><a href="sqlite3.html">sqlite3</a><br>
+                            </td>
+                            <td width="25%" valign=top></td>
+                            <td width="25%" valign=top></td>
+                            <td width="25%" valign=top></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <p>
+            <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+                <tr bgcolor="#d8c0c7">
+                    <td colspan=3 style="border-radius: 10px 10px 10px 0px; padding: 10px;">&nbsp;
+                        <font><big><strong>Classes</strong></big></font>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td bgcolor="#d8c0c7" style="border-radius: 0px 0px 10px 10px; padding: 10px;"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+                    <td>&nbsp;</td>
+                    <td width="100%">
+                        <dl>
+                            <dt><font><a href="builtins.html#object">builtins.object</a>
+</font></dt>
+                            <dd>
+                                <dl>
+                                    <dt><font><a href="model.html#MyModel">MyModel</a>
+</font></dt></dl>
+                            </dd>
+                        </dl>
+                        <p>
+                            <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+                                <tr bgcolor="#f2f2f2">
+                                    <td colspan=3>&nbsp;<br>
+                                        <font><a name="MyModel">class <strong>MyModel</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font>
+                                    </td>
+                                </tr>
+
+                                <tr bgcolor="#f2f2f2">
+                                    <td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+                                    <td colspan=2><tt>[ENG]&nbsp;Class&nbsp;in&nbsp;charge&nbsp;of&nbsp;creating&nbsp;the&nbsp;database&nbsp;and&nbsp;the&nbsp;table,&nbsp;if&nbsp;they&nbsp;do&nbsp;not&nbsp;already&nbsp;exist,&nbsp;and&nbsp;of&nbsp;communicating&nbsp;with&nbsp;it&nbsp;to&nbsp;do&nbsp;CRUD&nbsp;actions.<br>
+--------<br>
+[ESP]&nbsp;Clase&nbsp;encargada&nbsp;de&nbsp;crear&nbsp;la&nbsp;base&nbsp;de&nbsp;datos&nbsp;y&nbsp;la&nbsp;tabla,&nbsp;en&nbsp;caso&nbsp;de&nbsp;que&nbsp;no&nbsp;existan&nbsp;previamente,&nbsp;y&nbsp;de&nbsp;comunicarse&nbsp;con&nbsp;la&nbsp;misma&nbsp;para&nbsp;realizar&nbsp;acciones&nbsp;CRUD.<br>&nbsp;</tt></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td width="100%">Methods defined here:<br>
+                                        <dl><dt><a name="MyModel-__init__"><strong>__init__</strong></a>(self)</dt>
+                                            <dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyModel-create_task"><strong>create_task</strong></a>(self, name, date, type, desc)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;to&nbsp;create&nbsp;a&nbsp;new&nbsp;task&nbsp;in&nbsp;the&nbsp;database.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;de&nbsp;creación&nbsp;de&nbsp;una&nbsp;nueva&nbsp;tarea&nbsp;en&nbsp;la&nbsp;base&nbsp;de&nbsp;datos.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyModel-delete"><strong>delete</strong></a>(self, id)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;that&nbsp;removes&nbsp;an&nbsp;entry&nbsp;from&nbsp;a&nbsp;database&nbsp;according&nbsp;to&nbsp;a&nbsp;given&nbsp;id.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;que&nbsp;elimina&nbsp;una&nbsp;entrada&nbsp;de&nbsp;una&nbsp;base&nbsp;de&nbsp;datos&nbsp;según&nbsp;un&nbsp;id&nbsp;dado.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyModel-get_tasks"><strong>get_tasks</strong></a>(self, day)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;that&nbsp;returns&nbsp;all&nbsp;the&nbsp;entries&nbsp;in&nbsp;a&nbsp;database&nbsp;for&nbsp;a&nbsp;given&nbsp;date&nbsp;field&nbsp;value.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;que&nbsp;retorna&nbsp;todas&nbsp;las&nbsp;entradas&nbsp;de&nbsp;una&nbsp;base&nbsp;de&nbsp;datos&nbsp;para&nbsp;un&nbsp;valor&nbsp;del&nbsp;campo&nbsp;date&nbsp;determinado.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyModel-read"><strong>read</strong></a>(self, id)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;to&nbsp;read&nbsp;the&nbsp;values&nbsp;​​stored&nbsp;in&nbsp;a&nbsp;database&nbsp;according&nbsp;to&nbsp;a&nbsp;given&nbsp;id.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;de&nbsp;lectura&nbsp;de&nbsp;los&nbsp;valores&nbsp;guardados&nbsp;en&nbsp;la&nbsp;base&nbsp;de&nbsp;datos&nbsp;según&nbsp;un&nbsp;id&nbsp;dado.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyModel-run_query"><strong>run_query</strong></a>(self, query, params=())</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;to&nbsp;execute&nbsp;a&nbsp;query&nbsp;to&nbsp;the&nbsp;database,&nbsp;returning&nbsp;the&nbsp;results&nbsp;obtained&nbsp;according&nbsp;to&nbsp;the&nbsp;indicated&nbsp;query.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;para&nbsp;ejecutar&nbsp;una&nbsp;consulta&nbsp;a&nbsp;la&nbsp;base&nbsp;de&nbsp;datos,&nbsp;retornando&nbsp;los&nbsp;resultados&nbsp;obtenidos&nbsp;segun&nbsp;la&nbsp;consulta&nbsp;indicada.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyModel-sql_connection"><strong>sql_connection</strong></a>(self)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;to&nbsp;connect&nbsp;to&nbsp;the&nbsp;application&nbsp;database.&nbsp;<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;para&nbsp;conectarse&nbsp;a&nbsp;la&nbsp;base&nbsp;de&nbsp;datos&nbsp;de&nbsp;la&nbsp;aplicación.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyModel-sql_table"><strong>sql_table</strong></a>(self, con)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;that&nbsp;creates&nbsp;a&nbsp;table,&nbsp;if&nbsp;it&nbsp;does&nbsp;not&nbsp;already&nbsp;exist.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;que&nbsp;crea&nbsp;una&nbsp;tabla,&nbsp;si&nbsp;la&nbsp;misma&nbsp;no&nbsp;existe&nbsp;previamente.</tt></dd>
+                                        </dl>
+
+                                        <dl><dt><a name="MyModel-update"><strong>update</strong></a>(self, id, nname, ndate, ntype, ndesc)</dt>
+                                            <dd><tt>[ENG]&nbsp;Method&nbsp;to&nbsp;edit&nbsp;the&nbsp;values&nbsp;​​stored&nbsp;in&nbsp;the&nbsp;database&nbsp;for&nbsp;a&nbsp;task&nbsp;according&nbsp;to&nbsp;a&nbsp;given&nbsp;id.<br>
+--------<br>
+[ESP]&nbsp;Método&nbsp;de&nbsp;edición&nbsp;de&nbsp;los&nbsp;valores&nbsp;guardados&nbsp;en&nbsp;la&nbsp;base&nbsp;de&nbsp;datos&nbsp;para&nbsp;una&nbsp;tarea&nbsp;en&nbsp;partircular&nbsp;según&nbsp;un&nbsp;id&nbsp;dado.</tt></dd>
+                                        </dl>
+
+                                        <hr> Data descriptors defined here:<br>
+                                        <dl><dt><strong>__dict__</strong></dt>
+                                            <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+                                        </dl>
+                                        <dl><dt><strong>__weakref__</strong></dt>
+                                            <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+                                        </dl>
+                                        <hr> Data and other attributes defined here:<br>
+                                        <dl><dt><strong>db_name</strong> = 'studyassistant.db'</dl>
+
+</td></tr></table></td></tr></table>
+<footer style="background-color: #afe9e3; padding: 1px; text-align: center; border-radius: 10px; ">
+    <p>-- Made with❤️by Solcii --</p>
+</footer>
+<br>
+</body>
+
+</html>
