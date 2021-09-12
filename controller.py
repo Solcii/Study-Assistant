@@ -3,6 +3,11 @@ from view import MyView
 
 
 class MyApp:
+    """
+    [ENG] Class that acts as an application controller.
+    --------
+    [ESP] Clase que actúa como controlador de la aplicación.
+    """
     def __init__(self, window):
         MyView(window)
 

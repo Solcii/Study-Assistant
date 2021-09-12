@@ -18,10 +18,21 @@ from handlers import Handler
 from functions import get_day
 from functions import check_selection
 from functions import get_index
+from functions import pick_date
 
 
 class MyView:
+    """
+    [ENG] Class in charge of showing all the visual elements of the application.
+    --------
+    [ESP] Clase encargada de mostrar todos los elementos visuales de la aplicación.
+    """
     def __init__(self, window):
+        """
+        [ENG] Method that allows the application's main screen to be displayed when the application is initialized, taking the current day as the default date and showing the daily tasks in the list.
+        --------
+        [ESP] Método que permite que al inicializar la aplicación se muestre la pantalla principal de la misma, tomando como fecha por defecto el día actual y mostrando en el listado las tareas del día.
+        """
         self.handler = Handler()
         self.window = window
         self.window.title('Study Assistant')
@@ -96,16 +107,21 @@ class MyView:
         delete_button.grid(row=4, column=2, sticky='we')
 
         #Footer
-        self.handler.show_footer(self.window, 5)
+        self.show_footer(self.window, 5)
 
     #ADD VIEW
     def open_add_view(self, tree, str_value_of_day):
+        """
+        [ENG] Method that when pressing the ADD button, opens the screen to add a new task, leaving the main screen in the background.
+        --------
+        [ESP] Método que, al presionar el boton ADD, abre la pantalla de carga de datos, dejando la pantalla principal en segundo plano.
+        """
         add_window = Toplevel()
         add_window.config(background='#FDEFFD')
         add_window.title('Add task')
 
         #Header
-        self.handler.show_header(add_window)
+        self.show_header(add_window)
 
         #Inputs
         task_name_label = Label(add_window, text='Title: ')
@@ -153,11 +169,16 @@ class MyView:
         save_button.grid(row=6, column=0, sticky='we', columnspan=3)
 
         #Footer
-        self.handler.show_footer(add_window, 7)
+        self.show_footer(add_window, 7)
 
     
     #READ VIEW
     def open_read_view(self, tree, str_value_of_day):
+        """
+        [ENG] Method that, when pressing the READ button, opens the data reading screen of the selected task, leaving the main screen in the background. If a task was not previously selected, it returns an error message indicating to the user that to use this button they must first select a task from the list.
+        --------
+        [ESP] Método que, al presionar el boton READ, abre la pantalla de lectura de datos de la tarea seleccionada, dejando la pantalla principal en segundo plano. Si no se seleccionó previamente una tarea, devuelve un mensaje de error indicando al usuario que para utilizar dicho boton primero debe seleccionar una tarea de la lista.
+        """
         if check_selection(tree) == True:
             id = tree.selection()[0]
             values = self.handler.handler_read(id)
@@ -170,7 +191,7 @@ class MyView:
             read_window.title('Your task')
 
             #Header
-            self.handler.show_header(read_window)
+            self.show_header(read_window)
 
             #Inputs
             task_name_label = Label(read_window, text='Title: ')
@@ -218,11 +239,16 @@ class MyView:
             delete_button.grid(row=6, column=2, sticky='we')
 
             #Footer
-            self.handler.show_footer(read_window, 7)
+            self.show_footer(read_window, 7)
 
     
     #CALENDAR FUNCTIONS
     def open_calendar(self, date):
+        """
+        [ENG] Method that allows the user to select a date for the creation or edition of a task, from the opening of a window with a calendar.
+        --------
+        [ESP] Método que permite al usuario seleccionar una fecha para la creación o edición de una tarea, a partir de la apertura de una ventana con un calendario.
+        """
         calendar_window = Toplevel()
         calendar_window.config(background='#FDEFFD')
         calendar_window.title('Select a date')
@@ -238,17 +264,18 @@ class MyView:
         cal = Calendar(calendar_frame, selectmode='day',date_pattern='dd/mm/y' ,year=year, month=month, day=day)
         cal.grid(row=0, column=0)
 
-        get_date_button = Button(calendar_window, text='Select', font=('Verdana', 9), background='#0d6efd', foreground='#fff', activebackground='#064095', border=2, cursor='hand2' ,command= lambda: self.pick_date(calendar_window, cal, date))
+        get_date_button = Button(calendar_window, text='Select', font=('Verdana', 9), background='#0d6efd', foreground='#fff', activebackground='#064095', border=2, cursor='hand2' ,command= lambda: pick_date(calendar_window, cal, date))
         get_date_button.grid(row=1, column=0, sticky='we')
 
         footer = Label(calendar_window, background='#FDEFFD', font='Verdana, 1')
         footer.grid(row=2, column=0)
 
-    def pick_date(self, window, cal, date):
-        date.set(cal.get_date())
-        window.destroy()
-
     def delete_from_home(self, tree, str_value_of_day):
+        """
+        [ENG] Method that allows the user to delete a task from the main window using the DELETE button, showing a confirmation message before proceeding to delete the task. If a task was not previously selected, it returns an error message indicating to the user that to use the button they must first select a task from the list.
+        --------
+        [ESP] Método que permite al usuario eliminar una tarea desde la ventana principal utilizando el boton DELETE, mostrando un mensaje de confirmación antes de proceder a eliminar dicha tarea. Si no se seleccionó previamente una tarea, devuelve un mensaje de error indicando al usuario que para utilizar el boton primero debe seleccionar una tarea de la lista.
+        """
         if check_selection(tree) == True:
             conf = messagebox.askyesno(message='Task will be deleted. Are you sure?', title='Delete task')
 
@@ -257,6 +284,11 @@ class MyView:
                 self.handler.handler_delete(id, tree, str_value_of_day)
     
     def delete_from_read(self, tree, window, str_value_of_day):
+        """
+        [ENG] Method that allows the user to delete a task from the read window using the DELETE button, showing a confirmation message before proceeding to delete said task. If a task was not previously selected, it returns an error message indicating to the user that to use the button they must first select a task from the list.
+        --------
+        [ESP] Método que permite al usuario eliminar una tarea desde la ventana de lectura utilizando el boton DELETE, mostrando un mensaje de confirmación antes de proceder a eliminar dicha tarea. Si no se seleccionó previamente una tarea, devuelve un mensaje de error indicando al usuario que para utilizar el boton primero debe seleccionar una tarea de la lista.
+        """
         conf = messagebox.askyesno(message='Task will be deleted. Are you sure?', title='Delete task')
 
         if conf == True:
@@ -267,6 +299,11 @@ class MyView:
     
     #EDIT OPTION
     def open_edit_window(self, window, tree, str_value_of_day):
+        """
+        [ENG] Method that allows the user to access more information about a task. If a task was not previously selected, it returns an error message instructing the user that to use the READ button they must first select a task from the list.
+        --------
+        [ESP] Método que permite al usuario acceder a mayor información sobre una tarea. Si no se seleccionó previamente una tarea, devuelve un mensaje de error indicando al usuario que para utilizar el boton READ primero debe seleccionar una tarea de la lista.
+        """
         window.destroy()
         edit_window = Toplevel()
         edit_window.config(background='#FDEFFD')
@@ -280,7 +317,7 @@ class MyView:
         desc = values[3]
 
         #Header
-        self.handler.show_header(edit_window)
+        self.show_header(edit_window)
 
         #Inputs
         task_name_label = Label(edit_window, text='Title: ')
@@ -332,21 +369,24 @@ class MyView:
         save_button.grid(row=6, column=0, sticky='we', columnspan=3)
 
         #Footer
-        self.handler.show_footer(edit_window, 7)
+        self.show_footer(edit_window, 7)
 
+    def show_header(self, window):
+        """
+        [ENG] Method that displays the application header in each of the secondary windows.
+        --------
+        [ESP] Método que muestra el header de la aplicación en cada una de las ventanas secundarias.
+        """
+        self.header = PhotoImage(file='images/header_2.png').subsample(2)
+        label_header = Label(window, image=self.header)
+        label_header.grid(row=0, column=0, sticky='we', columnspan=3)
 
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def show_footer(self, window, row):
+        """
+        [ENG] Method that displays the application footer in each of the secondary windows.
+        --------
+        [ESP] Método que muestra el footer de la aplicación en cada una de las ventanas secundarias.
+        """        
+        footer_label = Label(window, text='Made with love by Solcii')
+        footer_label.config(fg='white', bg='#9463AD', font=('Verdana', 7, 'italic'), borderwidth=5)
+        footer_label.grid(row=row, column=0, sticky='we', columnspan=3)
