@@ -87,7 +87,7 @@ class MyModel:
         """
         try:
             query = f'UPDATE mytasks SET name = "{nname}", date = "{ndate}", type = "{ntype}", description = "{ndesc}" WHERE id = "{id}"'
-            result = self.run_query(query)
+            self.run_query(query)
         except Error:
             return Error()
 
@@ -99,7 +99,7 @@ class MyModel:
         """
         try:
             query = f'DELETE from mytasks WHERE id = "{id}"'
-            result = self.run_query(query)
+            self.run_query(query)
         except Error:
             return Error()
     

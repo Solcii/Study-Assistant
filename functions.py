@@ -51,7 +51,7 @@ def check_selection(tree):
     try: 
         tree.item(tree.selection())['text'][0]
         return True
-    except IndexError as e:
+    except IndexError:
         messagebox.showinfo(message='Please select a task', title='')
         return
 
