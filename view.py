@@ -377,8 +377,8 @@ class MyView:
         --------
         [ESP] Método que muestra el header de la aplicación en cada una de las ventanas secundarias.
         """
-        self.header = PhotoImage(file='images/header_2.png').subsample(2)
-        label_header = Label(window, image=self.header)
+        self.secondary_header = PhotoImage(file='images/header_2.png').subsample(2)
+        label_header = Label(window, image=self.secondary_header)
         label_header.grid(row=0, column=0, sticky='we', columnspan=3)
 
     def show_footer(self, window, row):
